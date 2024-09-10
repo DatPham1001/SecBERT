@@ -14,7 +14,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.autograd import Function
 from transformers import BertTokenizer, BertForSequenceClassification, AdamW
-
+import flwr as fl
 
 config = {
     "num_labels": 9,
@@ -22,7 +22,7 @@ config = {
     "hidden_size": 768,
     "max_length": 512,
 }    
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda")
 class DomainAdaptationModel(nn.Module):
 
     def __init__(self):
@@ -130,3 +130,5 @@ class ReviewDataset(Dataset):
 
     def __len__(self):
         return self.df.shape[0]
+    
+
